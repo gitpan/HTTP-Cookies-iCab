@@ -1,4 +1,4 @@
-# $Id: iCab.pm,v 1.4 2004/09/17 18:19:49 comdog Exp $
+# $Id: iCab.pm,v 1.5 2005/03/12 05:52:24 comdog Exp $
 package HTTP::Cookies::iCab;
 use strict;
 
@@ -37,7 +37,7 @@ brian d foy, C<< <bdfoy@cpan.org> >>
 
 =head1 COPYRIGHT
 
-Copyright 2003-2004, brian d foy, All rights reserved
+Copyright 2003-2005, brian d foy, All rights reserved
 
 This library is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself.
@@ -54,7 +54,7 @@ use constant TRUE   => 'TRUE';
 use constant FALSE  => 'FALSE';
 use constant OFFSET => 2_082_823_200;
 
-$VERSION = sprintf "%2d.%02d", q$Revision: 1.4 $ =~ m/ (\d+) \. (\d+) /xg;
+$VERSION = sprintf "%2d.%02d", q$Revision: 1.5 $ =~ m/ (\d+) \. (\d+) /xg;
 
 my $Debug = 0;
 

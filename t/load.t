@@ -1,4 +1,4 @@
-# $Id: load.t,v 1.2 2003/01/09 10:20:32 comdog Exp $
+# $Id: load.t,v 1.3 2005/03/12 05:52:24 comdog Exp $
 
 use Test::More tests => 6;
 
@@ -9,7 +9,6 @@ my %Domains = qw( .cnn.com 1 .usatoday.com 3 .doubleclick.net 1);
 
 my $jar = HTTP::Cookies::iCab->new( File => 't/Cookies.dat' );
 isa_ok( $jar, 'HTTP::Cookies::iCab' );
-
 
 my $hash = $jar->{COOKIES};
 
