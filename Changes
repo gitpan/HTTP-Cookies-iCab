@@ -1,1 +1,7 @@
-# $Id: Changes,v 1.1 2003/01/09 03:57:20 comdog Exp $
+# $Id: Changes,v 1.2 2003/01/09 10:31:39 comdog Exp $
+0.90_01 - Thu Jan  9 04:30:48 2003
+	* DEVELOPER'S RELEASE - the save() function does not work, but
+	the load() function does (should, might, etc.).  I still do not
+	understand the entire format, but I can pull out the stuff that
+	HTTP::Cookies needs.
+

@@ -1,7 +1,5 @@
-# $Id: prereq.t,v 1.1 2003/01/09 03:57:20 comdog Exp $
-use strict;
-
-use Test::More tests => 1;
-use Test::Prereq;
-
+# $Id: prereq.t,v 1.2 2004/09/17 18:09:45 comdog Exp $
+use Test::More;
+eval "use Test::Prereq";
+plan skip_all => "Test::Prereq required to test dependencies" if $@;
 prereq_ok();
