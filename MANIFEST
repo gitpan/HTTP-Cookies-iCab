@@ -1,0 +1,12 @@
+Changes
+MANIFEST			This list of files
+Makefile.PL
+lib/iCab.pm
+t/.cvsignore
+t/Cookies.dat
+t/compile.t
+t/load.t
+t/pod.t
+t/prereq.t
+t/save.t
+t/test_manifest
