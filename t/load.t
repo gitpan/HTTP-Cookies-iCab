@@ -1,9 +1,9 @@
-# $Id: load.t,v 1.3 2005/03/12 05:52:24 comdog Exp $
+# $Id: load.t,v 1.4 2006/07/20 21:51:09 comdog Exp $
 
 use Test::More tests => 6;
 
 use HTTP::Cookies::iCab;
-#use Data::Dumper;
+use Data::Dumper;
 
 my %Domains = qw( .cnn.com 1 .usatoday.com 3 .doubleclick.net 1);
 

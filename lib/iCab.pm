@@ -1,4 +1,4 @@
-# $Id: iCab.pm,v 1.5 2005/03/12 05:52:24 comdog Exp $
+# $Id: iCab.pm,v 1.7 2006/07/20 21:51:09 comdog Exp $
 package HTTP::Cookies::iCab;
 use strict;
 
@@ -37,7 +37,7 @@ brian d foy, C<< <bdfoy@cpan.org> >>
 
 =head1 COPYRIGHT
 
-Copyright 2003-2005, brian d foy, All rights reserved
+Copyright 2003-2006, brian d foy, All rights reserved
 
 This library is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself.
@@ -54,7 +54,7 @@ use constant TRUE   => 'TRUE';
 use constant FALSE  => 'FALSE';
 use constant OFFSET => 2_082_823_200;
 
-$VERSION = sprintf "%2d.%02d", q$Revision: 1.5 $ =~ m/ (\d+) \. (\d+) /xg;
+$VERSION = sprintf "%2d.%02d", q$Revision: 1.7 $ =~ m/ (\d+) \. (\d+) /xg;
 
 my $Debug = 0;
 
@@ -112,7 +112,6 @@ sub load
 				warn( "Setting cookie [$name]\n" ) if $Debug;
 				$self->set_cookie(undef, $name, $value, $path,
 					$domain, undef, 0, 0, $expires - time, 0);
-
 				next COOKIE;
 				}
 
@@ -143,7 +142,7 @@ sub save
 
 			return if $discard && not $self->{ignore_discard};
 
-			return if time > $expires;
+			return if defined $expires && time > $expires;
 
 			$expires = do {
 				unless( $expires ) { 0 }
