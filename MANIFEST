@@ -1,7 +1,9 @@
 .lwpcookies
 Changes
+examples/README
 hack/load_real
 lib/iCab.pm
+LICENSE
 Makefile.PL
 MANIFEST			This list of files
 META.yml

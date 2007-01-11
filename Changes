@@ -1,9 +1,15 @@
-# $Id: Changes,v 1.6 2006/07/20 21:53:22 comdog Exp $
+# $Id: Changes,v 1.7 2007/01/11 00:07:52 comdog Exp $
 0.90_01 - Thu Jan  9 04:30:48 2003
 	* DEVELOPER'S RELEASE - the save() function does not work, but
 	the load() function does (should, might, etc.).  I still do not
 	understand the entire format, but I can pull out the stuff that
 	HTTP::Cookies needs.
+
+1.09 - Wed Jan 10 18:07:32 2007
+	* Fixed endian bug in date reading. Now that Macs have Intel, that
+	matters.
+	* Updated license stuff.
+	* Everyone should upgrade.
 
 1.07 - Thu Jul 20 16:52:24 2006
 	* Fixed up one of the tests which failed due to an expiring cookie

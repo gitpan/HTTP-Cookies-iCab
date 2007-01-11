@@ -1,4 +1,4 @@
-# $Id: iCab.pm,v 1.7 2006/07/20 21:51:09 comdog Exp $
+# $Id: iCab.pm,v 1.9 2007/01/11 00:05:42 comdog Exp $
 package HTTP::Cookies::iCab;
 use strict;
 
@@ -35,12 +35,12 @@ members of the project can shepherd this module appropriately.
 
 brian d foy, C<< <bdfoy@cpan.org> >>
 
-=head1 COPYRIGHT
+=head1 COPYRIGHT AND LICENSE
 
-Copyright 2003-2006, brian d foy, All rights reserved
+Copyright (c) 2003-2007 brian d foy.  All rights reserved.
 
-This library is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself.
+This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 
@@ -54,9 +54,9 @@ use constant TRUE   => 'TRUE';
 use constant FALSE  => 'FALSE';
 use constant OFFSET => 2_082_823_200;
 
-$VERSION = sprintf "%2d.%02d", q$Revision: 1.7 $ =~ m/ (\d+) \. (\d+) /xg;
+$VERSION = sprintf "%2d.%02d", q$Revision: 1.9 $ =~ m/ (\d+) \. (\d+) /xg;
 
-my $Debug = 0;
+my $Debug = $ENV{DEBUG} || 0;
 
 sub load
 	{
@@ -64,18 +64,18 @@ sub load
 
     $file ||= $self->{'file'} || return;
 
-    open my $fh, $file or die "Could not open file [$file]: $!";
+    open my $fh, '<', $file or die "Could not open file [$file]: $!";
 
  	my $size = -s $file;
 
 	COOKIE: until( eof $fh )
 		{
-		warn "-" x 73, "\n" if $Debug;
+		print STDERR "\n", "-" x 73, "\n" if $Debug;
 		my $set_date = read_date( $fh );
-		warn( "\tset date is " . localtime( $set_date ) . "\n" )
+		print STDERR ( "\tset date is " . localtime( $set_date ) . "\n" )
 			if $Debug;
 		my $tag      = read_str( $fh, 4 );
-		warn( "==> tag is [$tag] not 'Cook'\n" )
+		print STDERR ( "==> tag is [$tag] not 'Cook'\n" )
 			unless $tag eq 'Cook';
 
 		my $name    = read_var( $fh );
@@ -174,7 +174,7 @@ sub read_int
 
 	my $result = read_str( $fh, 4 );
 
-	my $number = unpack( "I", $result );
+	my $number = unpack( "N", $result );
 
 	return $number;
 	}
