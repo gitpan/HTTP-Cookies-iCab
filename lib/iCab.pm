@@ -1,6 +1,9 @@
-# $Id: iCab.pm,v 1.9 2007/01/11 00:05:42 comdog Exp $
+# $Id: iCab.pm 2637 2008-08-06 13:44:04Z comdog $
 package HTTP::Cookies::iCab;
 use strict;
+
+use warnings;
+no warnings;
 
 =head1 NAME
 
@@ -17,7 +20,9 @@ HTTP::Cookies::iCab - Cookie storage and management for iCab
 =head1 DESCRIPTION
 
 This package overrides the load() and save() methods of HTTP::Cookies
-so it can work with iCab cookie files.
+so it can work with iCab 3 cookie files. This doesn't work on iCab
+4 cookie files yet, but if you really need that, convert HTTP::Cookies::Safari
+to do what you need.
 
 See L<HTTP::Cookies>.
 
@@ -37,7 +42,7 @@ brian d foy, C<< <bdfoy@cpan.org> >>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2003-2007 brian d foy.  All rights reserved.
+Copyright (c) 2003-2008 brian d foy.  All rights reserved.
 
 This program is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
@@ -54,7 +59,7 @@ use constant TRUE   => 'TRUE';
 use constant FALSE  => 'FALSE';
 use constant OFFSET => 2_082_823_200;
 
-$VERSION = sprintf "%2d.%02d", q$Revision: 1.9 $ =~ m/ (\d+) \. (\d+) /xg;
+$VERSION = '1.120';
 
 my $Debug = $ENV{DEBUG} || 0;
 
@@ -68,6 +73,9 @@ sub load
 
  	my $size = -s $file;
 
+	#my $header = <$fh>;
+	#print STDERR "HEADER is [$header]\n";
+	
 	COOKIE: until( eof $fh )
 		{
 		print STDERR "\n", "-" x 73, "\n" if $Debug;
@@ -228,4 +236,5 @@ sub peek
 
 	return $string;
 	}
+
 1;
