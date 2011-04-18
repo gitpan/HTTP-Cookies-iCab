@@ -1,11 +1,8 @@
-# $Id: load.t 1888 2006-07-20 21:51:09Z comdog $
-
 use Test::More tests => 6;
 
 use HTTP::Cookies::iCab;
-use Data::Dumper;
 
-my %Domains = qw( .cnn.com 1 .usatoday.com 3 .doubleclick.net 1);
+my %Domains = qw( .cnn.com 1 .usatoday.com 3 .doubleclick.net 1 );
 
 my $jar = HTTP::Cookies::iCab->new( File => 't/Cookies.dat' );
 isa_ok( $jar, 'HTTP::Cookies::iCab' );
@@ -24,5 +21,3 @@ foreach my $domain ( keys %Domains )
 
 is( $hash->{'.cnn.com'}{'/'}{'CNNid'}[1], '8b990c1a-20494-1039716453-329', 
 	'Cookie has right value' );
-
-#print STDERR Data::Dumper::Dumper( $jar );

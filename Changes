@@ -1,9 +1,8 @@
-# $Id: Changes 2638 2008-08-06 13:47:25Z comdog $
-0.90_01 - Thu Jan  9 04:30:48 2003
-	* DEVELOPER'S RELEASE - the save() function does not work, but
-	the load() function does (should, might, etc.).  I still do not
-	understand the entire format, but I can pull out the stuff that
-	HTTP::Cookies needs.
+# This is the Changes file for HTTP::Cookies::iCab
+
+1.130 - Mon Apr 18 17:03:23 2011
+	* Update the cookie expiry times so the tests pass
+	* Everything else works the same as before
 
 1.120 - Wed Aug  6 08:46:38 2008
 	* Fix to Cookies.dat file to ensure the cookies don't expire
@@ -34,3 +33,8 @@
  * this is a non-developer release, although it might still have
  problems
 
+0.90_01 - Thu Jan  9 04:30:48 2003
+	* DEVELOPER'S RELEASE - the save() function does not work, but
+	the load() function does (should, might, etc.).  I still do not
+	understand the entire format, but I can pull out the stuff that
+	HTTP::Cookies needs.

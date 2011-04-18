@@ -1,4 +1,3 @@
-# $Id: iCab.pm 2637 2008-08-06 13:44:04Z comdog $
 package HTTP::Cookies::iCab;
 use strict;
 
@@ -42,7 +41,7 @@ brian d foy, C<< <bdfoy@cpan.org> >>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2003-2008 brian d foy.  All rights reserved.
+Copyright (c) 2003-2011 brian d foy.  All rights reserved.
 
 This program is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
@@ -59,7 +58,7 @@ use constant TRUE   => 'TRUE';
 use constant FALSE  => 'FALSE';
 use constant OFFSET => 2_082_823_200;
 
-$VERSION = '1.120';
+$VERSION = '1.130';
 
 my $Debug = $ENV{DEBUG} || 0;
 
@@ -73,9 +72,6 @@ sub load
 
  	my $size = -s $file;
 
-	#my $header = <$fh>;
-	#print STDERR "HEADER is [$header]\n";
-	
 	COOKIE: until( eof $fh )
 		{
 		print STDERR "\n", "-" x 73, "\n" if $Debug;
@@ -96,7 +92,8 @@ sub load
 		warn( "\tvalue is [$value]\n" ) if $Debug;
 
 		my $expires = read_int( $fh ) - OFFSET;
-		warn( "\texpires is " .
+
+		warn( "\t$name expires at " .
 			localtime( $expires ) . "\n" ) if $Debug;
 		my $str     = read_str( $fh, 7 );
 
@@ -105,7 +102,7 @@ sub load
 			warn( "read $pos of $size bytes\n" ) if $Debug > 1;
 			if( eof $fh )
 				{
-				warn( "Setting cookie [$name]\n" ) if $Debug;
+				warn( "At end of file, setting cookie [$name]\n" ) if $Debug;
 				$self->set_cookie(undef, $name, $value, $path,
 					$domain, undef, 0, 0, $expires - time, 0);
 
@@ -143,6 +140,8 @@ sub save
 
     $file ||= $self->{'file'} || return;
 
+	open my $fh, '>:raw', $file or die "Could not write file [$file]! $!\n";
+
     $self->scan(
     	sub {
 			my( $version, $key, $val, $path, $domain, $port,
@@ -152,27 +151,22 @@ sub save
 
 			return if defined $expires && time > $expires;
 
-			$expires = do {
-				unless( $expires ) { 0 }
-				else
-					{
-					my @times = localtime( $expires );
-					$times[5] += 1900;
-					$times[4] += 1;
-
-					sprintf "%4d-%02d-%02dT%02d:%02d:%02dZ",
-						@times[5,4,3,2,1,0];
-					}
-				};
+			$expires += OFFSET;
 
 			$secure = $secure ? TRUE : FALSE;
 
 			my $bool = $domain =~ /^\./ ? TRUE : FALSE;
 
-	    		}
+			print $fh 'Date', pack( 'N', time + OFFSET ),
+				      'Cook', 
+				      pack( 'N', length $key    ), $key, 
+				      pack( 'N', length $path   ), $path,
+				      pack( 'N', length $domain ), $domain,
+				      pack( 'N', length $val    ), $val,
+				      pack( 'N', $expires );
+	    	}
 		);
 
-	open my $fh, "> $file" or die "Could not write file [$file]! $!\n";
     close $fh;
 	}
 
@@ -210,6 +204,7 @@ sub read_var
 	my $fh = shift;
 
 	my $length = read_int( $fh );
+	warn "length is $length\n" if $Debug > 1;
 	my $string = read_str( $fh, $length );
 
 	return $string;
