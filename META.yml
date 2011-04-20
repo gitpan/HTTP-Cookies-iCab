@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               HTTP-Cookies-iCab
-version:            1.130
+version:            1.131
 abstract:           Cookie storage and management for iCab 3
 author:
     - brian d foy <bdfoy@cpan.org>

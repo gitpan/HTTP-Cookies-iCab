@@ -1,5 +1,9 @@
 # This is the Changes file for HTTP::Cookies::iCab
 
+1.131 - Wed Apr 20 13:55:38 2011
+	-* Update required version to Perl 5.8 for the :raw 
+	encoding.
+
 1.130 - Mon Apr 18 17:03:23 2011
 	* Update the cookie expiry times so the tests pass
 	* Everything else works the same as before
